@@ -20,7 +20,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     implementation(gradleApi())
     implementation("org.openapitools:openapi-generator-gradle-plugin:5.3.0")
-
+    implementation("org.slf4j:slf4j-api:1.7.25")
 }
 
 tasks.getByName<Test>("test") {

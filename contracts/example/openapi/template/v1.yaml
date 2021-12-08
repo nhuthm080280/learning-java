@@ -7,7 +7,7 @@ servers:
           - dev
           - prod
         default: dev
-  
+
 info:
   description: >-
     This is a sample server Student info server. For this sample, you can use the api key
@@ -40,7 +40,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/StudentRequest'
       security:
-        - student_auth: []
+        - student_auth: [ ]
   /query-api/student-service/students:
     get:
       tags:
@@ -145,7 +145,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/StudentRequest'
       security:
-        - student_auth: []
+        - student_auth: [ ]
     delete:
       tags:
         - mutation-student
@@ -168,7 +168,7 @@ paths:
         '404':
           description: student not found
       security:
-        - student_auth: []
+        - student_auth: [ ]
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
@@ -257,4 +257,4 @@ components:
           format: int64
 
 security:
-  - student_auth: []
+  - student_auth: [ ]

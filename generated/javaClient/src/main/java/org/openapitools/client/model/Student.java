@@ -29,7 +29,7 @@ import java.util.UUID;
  * Student info
  */
 @ApiModel(description = "Student info")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-12-08T15:22:30.783447+07:00[Asia/Ho_Chi_Minh]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-12-08T20:32:52.056792+07:00[Asia/Ho_Chi_Minh]")
 public class Student {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
