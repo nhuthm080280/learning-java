@@ -1,0 +1,323 @@
+openapi: 3.0.0
+info:
+  description: "This is a sample server Student info server. For this sample, you\
+    \ can use the api key `special-key` to test the authorization filters."
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: OpenAPI student info
+  version: 0.0.2
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: "https://{env}-sg.portal.template.com"
+  variables:
+    env:
+      default: dev
+      enum:
+      - dev
+      - prod
+security:
+- student_auth: []
+tags:
+- description: Everything about your students
+  name: student
+paths:
+  /mutation-api/student-service/students:
+    post:
+      operationId: addstudent
+      requestBody:
+        $ref: '#/components/requestBodies/StudentRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+          description: successful operation
+        "405":
+          description: Invalid input
+      security:
+      - student_auth: []
+      summary: Add new student
+      tags:
+      - mutation-student
+      x-contentType: application/json
+      x-accepts: application/json
+  /query-api/student-service/students:
+    get:
+      description: Returns all students
+      operationId: getAllstudents
+      parameters:
+      - explode: true
+        in: query
+        name: firstName
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: middleName
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastName
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The number of students to skip before starting to collect the
+          result set.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+      - description: The number of students to return.
+        explode: true
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentCollection'
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Student not found
+      summary: Get all students
+      tags:
+      - query-student
+      x-accepts: application/json
+  /query-api/student-service/students/{id}:
+    get:
+      description: Returns a single student
+      operationId: get_student_by_id
+      parameters:
+      - description: ID of student to return
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Student not found
+      summary: Find student by ID
+      tags:
+      - query-student
+      x-accepts: application/json
+  /mutation-api/student-service/students/{id}:
+    delete:
+      operationId: delete_student
+      parameters:
+      - description: ID of student to delete
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: student not found
+      security:
+      - student_auth: []
+      summary: Deletes a student
+      tags:
+      - mutation-student
+      x-accepts: application/json
+    put:
+      operationId: update_student
+      parameters:
+      - description: ID of student to update
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/StudentRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Student not found
+        "405":
+          description: Validation exception
+      security:
+      - student_auth: []
+      summary: Update an existing student
+      tags:
+      - mutation-student
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  requestBodies:
+    StudentArray:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/Student'
+            type: array
+      description: List of student object
+      required: true
+    StudentRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Student'
+      description: student object that needs to be added to the database
+      required: true
+  schemas:
+    Student:
+      description: Student info
+      example:
+        firstName: Nguyen
+        lastName: Chien
+        saintId: 40e6215d-b5c6-4896-987c-f30f3678f608
+        placeOfBirth: Tra Vinh
+        phone: +84 1228019700
+        middleName: Huu
+        dateOfBirth: 1983-05-16
+        id: 53f549b9-99bf-4e12-88e3-c2f868953283
+        polityId: 4d084b56-54e1-4bd2-878e-c52675497c2b
+        title: PRIEST
+        schoolName: Dai Chung Vien Thanh Quy - Can Tho
+        email: binh@sunrise.vn
+      properties:
+        id:
+          example: 53f549b9-99bf-4e12-88e3-c2f868953283
+          format: uuid
+          type: string
+        polityId:
+          example: 4d084b56-54e1-4bd2-878e-c52675497c2b
+          format: uuid
+          type: string
+        saintId:
+          example: 40e6215d-b5c6-4896-987c-f30f3678f608
+          format: uuid
+          type: string
+        title:
+          example: PRIEST
+          type: string
+        firstName:
+          example: Nguyen
+          type: string
+        middleName:
+          example: Huu
+          type: string
+        lastName:
+          example: Chien
+          type: string
+        dateOfBirth:
+          description: date of birth in format YYYY-MM-DD
+          example: 1983-05-16
+          pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+          type: string
+        placeOfBirth:
+          example: Tra Vinh
+          type: string
+        email:
+          example: binh@sunrise.vn
+          type: string
+        phone:
+          example: +84 1228019700
+          type: string
+        schoolName:
+          example: Dai Chung Vien Thanh Quy - Can Tho
+          type: string
+      title: Student
+      type: object
+      xml:
+        name: student
+    StudentCollection:
+      example:
+        total: 0
+        hasMore: true
+        students:
+        - firstName: Nguyen
+          lastName: Chien
+          saintId: 40e6215d-b5c6-4896-987c-f30f3678f608
+          placeOfBirth: Tra Vinh
+          phone: +84 1228019700
+          middleName: Huu
+          dateOfBirth: 1983-05-16
+          id: 53f549b9-99bf-4e12-88e3-c2f868953283
+          polityId: 4d084b56-54e1-4bd2-878e-c52675497c2b
+          title: PRIEST
+          schoolName: Dai Chung Vien Thanh Quy - Can Tho
+          email: binh@sunrise.vn
+        - firstName: Nguyen
+          lastName: Chien
+          saintId: 40e6215d-b5c6-4896-987c-f30f3678f608
+          placeOfBirth: Tra Vinh
+          phone: +84 1228019700
+          middleName: Huu
+          dateOfBirth: 1983-05-16
+          id: 53f549b9-99bf-4e12-88e3-c2f868953283
+          polityId: 4d084b56-54e1-4bd2-878e-c52675497c2b
+          title: PRIEST
+          schoolName: Dai Chung Vien Thanh Quy - Can Tho
+          email: binh@sunrise.vn
+      properties:
+        students:
+          items:
+            $ref: '#/components/schemas/Student'
+          type: array
+        hasMore:
+          type: boolean
+        total:
+          format: int64
+          type: integer
+  securitySchemes:
+    student_auth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
