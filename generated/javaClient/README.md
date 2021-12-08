@@ -2,7 +2,7 @@
 
 OpenAPI student info
 - API version: 0.0.2
-  - Build date: 2021-12-07T14:27:37.301097+07:00[Asia/Ho_Chi_Minh]
+  - Build date: 2021-12-08T15:22:30.783447+07:00[Asia/Ho_Chi_Minh]
 
 This is a sample server Student info server. For this sample, you can use the api key `special-key` to test the authorization filters.
 

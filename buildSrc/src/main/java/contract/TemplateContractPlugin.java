@@ -13,6 +13,7 @@ public class TemplateContractPlugin implements Plugin<Project> {
             .doLast(task -> {
                 extension.generateContract();
             });
+
     }
 
 }

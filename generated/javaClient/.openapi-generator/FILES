@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -39,7 +38,3 @@ src/main/java/org/openapitools/client/auth/HttpBasicAuth.java
 src/main/java/org/openapitools/client/auth/HttpBearerAuth.java
 src/main/java/org/openapitools/client/model/Student.java
 src/main/java/org/openapitools/client/model/StudentCollection.java
-src/test/java/org/openapitools/client/api/MutationStudentApiTest.java
-src/test/java/org/openapitools/client/api/QueryStudentApiTest.java
-src/test/java/org/openapitools/client/model/StudentCollectionTest.java
-src/test/java/org/openapitools/client/model/StudentTest.java
