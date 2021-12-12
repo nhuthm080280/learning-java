@@ -6,14 +6,12 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.DefaultTask;
-import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
 import java.io.IOException;
 
 public class DownloadContract extends DefaultTask {
-    @OutputDirectory
     String downloadDir = this.getProject().getBuildDir() + "/openapi/downloaded/";
     String bucketName = "nhuttest";
     String fileName = "v1.yaml";
