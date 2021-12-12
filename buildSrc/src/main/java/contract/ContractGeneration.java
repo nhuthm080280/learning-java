@@ -1,6 +1,7 @@
 package contract;
 
 import org.gradle.api.DefaultTask;
+import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
 import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.DefaultGenerator;
@@ -10,10 +11,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ContractGeneration extends DefaultTask {
-    String projectDir = this.getProject().getProjectDir().getAbsolutePath();
-    String tempOutputDirectory = projectDir + "/generated/javaClient";
-    String contractPath = "/contracts/example/openapi/template/v1.yaml";
-    String inputDir = projectDir + contractPath;
+    String tempOutputDirectory = this.getProject().getBuildDir() + "/generated/javaClient";
+    String contractPath = "/openapi/downloaded/v1.yaml";
+    String inputDir = this.getProject().getBuildDir() + contractPath;
     @TaskAction
     void generateContract() {
         System.out.println("Start generate API java");

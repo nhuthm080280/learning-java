@@ -20,6 +20,7 @@ dependencies {
 //    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 //    implementation(gradleApi())
     implementation("org.openapitools:openapi-generator-gradle-plugin:5.3.0")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.126")
 }
 
 //tasks.getByName<Test>("test") {
