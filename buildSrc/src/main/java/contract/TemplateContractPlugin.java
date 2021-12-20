@@ -24,6 +24,8 @@ public class TemplateContractPlugin implements Plugin<Project> {
         project.getTasks().register("generateContract", ContractGeneration.class, task -> {
             task.setGroup("contract");
         });
+        project.getTasks().getByName("compileJava").dependsOn("downloadContract");
+        project.getTasks().getByName("generateContract").dependsOn("downloadContract");
     }
 
 }
