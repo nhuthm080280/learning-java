@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class ContractGeneration extends DefaultTask {
     String tempOutputDirectory = this.getProject().getBuildDir() + "/generated/javaClient";
-    String contractPath = "/openapi/downloaded/v1.yaml";
+    String contractPath = "/openapi/downloaded/v1.yml";
     String inputDir = this.getProject().getBuildDir() + contractPath;
     @TaskAction
     void generateContract() {
@@ -24,6 +24,7 @@ public class ContractGeneration extends DefaultTask {
         codegenConfigurator.setInputSpec(inputDir);
         codegenConfigurator.setOutputDir(tempOutputDirectory);
         codegenConfigurator.setLanguageSpecificPrimitives(languages);
+        codegenConfigurator.setTemplateDir(this.getProject().getProjectDir() + "/buildSrc/src/main/resources/openapi.templates.java/libraries.resttemplate");
         final ClientOptInput clientOptInput = codegenConfigurator.toClientOptInput();
         new DefaultGenerator().opts(clientOptInput).generate();
     }

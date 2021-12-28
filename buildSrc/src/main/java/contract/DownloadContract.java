@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DownloadContract extends DefaultTask {
     String downloadDir = this.getProject().getBuildDir() + "/openapi/downloaded/";
     String bucketName = "nhuttest";
-    String fileName = "v1.yaml";
+    String fileName = "v1.yml";
 
     @TaskAction
     void download() throws IOException {
