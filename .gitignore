@@ -20,3 +20,5 @@ target
 .gradle
 build
 /buildSrc/build
+/buildSrc/.gradle
+.idea
