@@ -2,6 +2,12 @@ package contract;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.plugins.JavaPluginConvention;
+import org.gradle.api.tasks.SourceSet;
+import org.openapitools.codegen.CodegenConstants;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 public class TemplateContractPlugin implements Plugin<Project> {
 
@@ -26,6 +32,12 @@ public class TemplateContractPlugin implements Plugin<Project> {
         });
         project.getTasks().getByName("compileJava").dependsOn("downloadContract");
         project.getTasks().getByName("generateContract").dependsOn("downloadContract");
+
+        JavaPluginConvention javaConvention = project.getConvention().getPlugin(JavaPluginConvention.class);
+        SourceSet main = javaConvention.getSourceSets().getByName(SourceSet.MAIN_SOURCE_SET_NAME);
+        main.getJava().srcDir(Collections.singleton(
+            project.getBuildDir() + "/openapi/generated/src/main/java"
+        ));
     }
 
 }
