@@ -36,7 +36,8 @@ public class TemplateContractPlugin implements Plugin<Project> {
         JavaPluginConvention javaConvention = project.getConvention().getPlugin(JavaPluginConvention.class);
         SourceSet main = javaConvention.getSourceSets().getByName(SourceSet.MAIN_SOURCE_SET_NAME);
         main.getJava().srcDir(Collections.singleton(
-            project.getBuildDir() + "/openapi/generated/src/main/java"
+            project.getBuildDir().getAbsolutePath() + "/openapi/generated/src/main/java"
+//            "/Users/macintoshhd/workspace/java/new/learning-java/build/openapi/generated/src/main/java"
         ));
     }
 

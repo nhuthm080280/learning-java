@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
 @RestController
-public class TestController extends MutationStudentApi {
+public class StudentController extends MutationStudentApi {
 
     @Override
     public Student addstudent(Student student) throws RestClientException {
