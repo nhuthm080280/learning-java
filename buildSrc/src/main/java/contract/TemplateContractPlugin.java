@@ -30,14 +30,13 @@ public class TemplateContractPlugin implements Plugin<Project> {
         project.getTasks().register("generateContract", ContractGeneration.class, task -> {
             task.setGroup("contract");
         });
-        project.getTasks().getByName("compileJava").dependsOn("downloadContract");
+        project.getTasks().getByName("compileJava").dependsOn("generateContract");
         project.getTasks().getByName("generateContract").dependsOn("downloadContract");
 
         JavaPluginConvention javaConvention = project.getConvention().getPlugin(JavaPluginConvention.class);
         SourceSet main = javaConvention.getSourceSets().getByName(SourceSet.MAIN_SOURCE_SET_NAME);
         main.getJava().srcDir(Collections.singleton(
             project.getBuildDir().getAbsolutePath() + "/openapi/generated/src/main/java"
-//            "/Users/macintoshhd/workspace/java/new/learning-java/build/openapi/generated/src/main/java"
         ));
     }
 
